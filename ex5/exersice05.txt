@@ -1,0 +1,230 @@
+Разписани упражнения по Операционни системи за специалност Информатика от Йордан Бабуков.
+
+Операционни системи, упражнение 05
+
+Команди до момента:
+упр1) pwd, ls, echo, date, man
+упр2) who, passwd, cat, more, less, head, tail, touch, rm, mkdir, rmdir, cp, mv, sort, cut, grep
+упр3) wc, read, sleep, работа с променливи, изпълнение на команди във фонов режим, пренасочване на стандартен изход, стандартен вход,
+стандартен изход за грешка, регулярни изрази към команда ls, регулярни изрази към команда grep, конвейр от команди.
+упр4) Системни променливи: HOME, PS1, PATH, Екраниращи символи "", '', \, Работа с текстов редактор "vi"
+
+
+*, ?, []
+grep -v   -- invert match
+ls *.txt
+.sh
+sh, sh -c
+--
+&
+vi, i, esc, :wq, :q!, 
+
+Новo:
+Код на завършване на последно изпълнена команда
+Команда exit
+Позиционни параметри
+if
+whilе
+until
+for 
+
+
+http://www.ibm.com/developerworks/linux/library/l-bash2/index.html
+
+
+1) 
+Код на завършване на последно изпълнена команда
+
+Всяка изпълнена команда, след завършването си връща код, с който сигнализира дали е завършила успешно или не.
+Код на завършване при успех -> 0
+Код на завършване при неуспех -> число по-голямо от 0
+Визуализиране на изхода на завършване: echo $?
+Примери:
+При успех:
+[jbabukov@localhost ~]$ echo "Здравей"
+Здравей
+[jbabukov@localhost ~]$ echo $?
+0
+
+При неуспех:
+[jbabukov@localhost ~]$ cp k1 k2 k3
+cp: target `k3' is not a directory
+[jbabukov@localhost ~]$ echo $?
+1
+[jbabukov@localhost ~]$ echo $?
+0 	-> този изход е 0, защото последната изпълнена команда е предишното echo $?
+
+Команда exit
+Изпълнена в shell скрипт, команда exit приключва изпълнението на скрипта. 
+Може да модифицираме кода на изход чрез команда exit. 
+еxit, exit 99, exit 1, exit 200
+
+
+2)
+Позиционни параметри
+
+При стартиране на скрипт от команден ред, подадените към него аргументи се наричат позиционни параметри (positional parameters)
+
+Достъп до позиционни параметри: $1, $2... ${10}, ${11},.. ${n}
+$0 	-> се асоциира с името на скрипта, с който работим.
+$1 	-> с първия му позиционен параметър и така нататък..
+$* 	-> се асоциира с всички позиционни параметри последователно.
+$@ 	-> като $*
+$# 	-> брой позиционни параметри (не се включва името на баш скрипта)
+
+
+[jbabukov@localhost ~]$ cat bash_01.sh
+#!/bin/bash
+
+echo "The name of script is: $0"
+echo "First positional parameter's value is: $1"
+echo "Second positional parameter's value is: $2"
+
+echo
+
+echo "Number of positional parameters is: $#"
+
+echo
+
+echo "All positional parameters in once: $*"
+[jbabukov@localhost ~]$ bash bash_01.sh Irina Masara
+The name of script is: bash_01.sh
+First positional parameter's value is: Irina
+Second positional parameter's value is: Masara
+
+Number of positional parameters is: 2
+
+All positional parameters in once: Irina Masara
+
+
+
+3)
+Работа с условен оператор if
+
+Синтаксис:
+if [ ... ]
+then
+	...
+elif [ ... ]	-> може да имаме N на брой вложени elif-а 
+then
+	...
+else		
+	...
+fi
+
+Числово сравняване:
+number1 -eq number2 (equal)
+number1 -ne number2 (not equal)
+number1 -gt number2 (greater than)
+number1 -ge number2 (greater or equal)
+number1 -lt number2 (less than)
+number1 -le number2 (less equal)
+
+Сравняване на низове
+"стринг1" = "стринг2" 
+"стринг1" != "стринг2" 
+"стринг1" >= "стринг2" 
+"стринг1" > "стринг2" 
+"стринг1" <= "стринг2" 
+"стринг1" < "стринг2" 
+
+Логически съединения: -o, -a, &&, ||
+
+cat bash_02.sh
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then
+	exit 99
+fi
+
+if [ $1 -le 10 -a $1 -gt 2 ]
+then
+	echo "$1 is between (2 and 10]"
+elif [$1 -le 2]
+then	
+	echo "$1 is less or equal to 2"
+else
+	echo "$1 is greater than 10"
+fi
+
+
+cat bash_03.sh
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then
+	exit 99
+fi
+
+if [ $1 -le 10 ] && [ $1 -gt 2 ]
+then
+	echo "$1 is between (2 and 10]"
+elif [$1 -le 2]
+then	
+	echo "$1 is less or equal to 2"
+else
+	echo "$1 is greater than 10"
+fi
+
+4)
+Оператор while и оператор until
+
+Синтаксис
+while [ ... ]
+do
+	...
+done
+
+#Приканва потребителят да въвежда вход, докато не въведе число в интервала [0-9]
+while [ true ]
+do
+	echo "Enter digit between 0 and 9"
+	read my_digit
+	
+	if ! [ $my_digit -lt 0 -o $my_digit -gt 9 ]
+	then
+		echo "Good job! "
+		break
+	else
+		echo "Try again! "
+		continue
+	fi
+
+	echo "This line will never be printed - why? " 
+done
+
+----
+until 	-> синтаксис: идентичен на while. Логика: идентична на while с разлика едно логическо отрицание в условието, до което ще бъдат изпълнявани.
+
+5)
+Оператор for
+
+Синтаксис 
+for my_var in val1 val2 val3...
+do
+	...
+done
+
+Примери:
+for i in 2 5 1 10
+do
+	echo "$i"	-> ще изведе на стандартния изход числата 2 5 1 10 всяко на нов ред.
+done
+
+for i in $(seq 1 20)
+do
+	echo "$i"	-> ще изведе на стандартния изход числата от 1 до 20 през стъпка 1 всяко на нов ред.
+done
+
+for i in $(seq 1 5 20)
+do
+	echo "$i"	-> ще изведе на стандартния изход числата от 1 до 20 през стъпка 5. (1,6,11,16)
+done
+
+
+Обхождане на позиционни параметри:
+for i in $*
+do 
+	echo "$i"
+done

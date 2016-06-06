@@ -1,0 +1,102 @@
+Задачи комплект 1)
+
+Задача 0: Копирайте си файла /etc/passwd във вашата работна директория под името myFile02
+Задача 1: Изведете съдържанието на файла myFile02 сортирано по
+потребителско име
+Задача 2: Сортирайте файла myFile02 по трето поле. Сега направете числово
+сортиране отново по трето поле. Има ли разлика?
+Задача 3: Изведете всички редове от файла myFile02, които съдържат низа
+"s". Запазете изхода във файл "grepped". Използвайте филтър, за да
+преброите редовете от файла "grepped"
+Задача 4: Изведете всички редове от файла myFile02, чиито потребителски
+имена завършват с цифра.
+Задача 5: Изведете само home директориите на всички потребители в
+системата, чийто потребителски имена започват с главна латинска буква.
+
+Малко информация какво представляват самите полета по-долу
+1) потребителски акаунт (име)
+2) означава, че паролата не се пази в /etc/passwd, ами в /etc/shadow и то
+в криптиран вид
+3) UID (user ID) на съответния потребител
+4) GUID (group user ID) на съответния потребител
+5) коментар към потребителя
+6) home директория на съответния потребител
+7) програма, която ще бъде изпълнена при успешно аутентикиране на
+потребителя (т.е. въвел е правилни съответни потребител и парола)
+
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+tcpdump:x:72:72::/:/sbin/nologin
+dhcpd:x:177:177:DHCP server:/:/sbin/nologin
+radvd:x:75:75:radvd user:/:/sbin/nologin
+ntp:x:38:38::/etc/ntp:/sbin/nologin
+apache:x:48:48:Apache:/var/www:/sbin/nologin
+cat:x:501:501:normal user:/home/cat:/bin/bash
+dog:x:502:502:normal user:/home/dog:/bin/bash
+woman:x:515:515:no user:/home/woman:/bin/bash
+tree:x:570:570:super normal user:/home/tree:/bin/bash
+l33t:x:556:556:normal user:/home/l33t:/bin/bash
+dancho7:x:588:588::/home/dancho7:/bin/bash
+user01:x:557:557:normal user:/home/user01:/bin/bash
+15hello:x:522:522:normal user:/home/15hello:/bin/bash
+Nadq03:x:599:599:privilleged user:/home/Nadq03:/bin/bash
+Nikoleta88:x:561:561:normal user:/home/Nikoleta88:/bin/bash
+inna2013:x:581:581:normal user:/home/inna2013:/bin/bash
+
+Задачи комплект 2)
+1. Запаметете във файл в своята home директория резултатът от командата
+ls -l изпълнена за вашата home директорията.
+
+2. Сортирайте файла по второ поле (numeric, alphabetically)
+
+3. Извлечете всички редове от файла с информация за файловете/директориите
+модифицирани през март месец, запазете ги във файл и изведете броят им.
+
+Задачи комплект 3)
+Да се напише командa или последователност от команди, която:
+
+1)Извежда на стандартния изход само имената на логически включените потребители и броят им. Пример:
+s43000
+s44000
+Броя на потребителите е 2
+2)Чете от стандартния вход 2 низа – име на логически включен потребител и съществуващ файл. Изпраща съобщение на потребителя с текст от файла.
+3)Чете от стандартния вход имената на 3 файла. Обединява редовете на първите два, подрежда ги по азбучен ред и резултата записва в третия файл. Извежда на стандартния изход размерите на трите файла.
+4)Чете от стандартния вход име на съществуващ файл и символен низ. Проверява дали низа се съдържа във файла.
+
+
+
+
+Примерни решения
+Задачи коплект 1:
+1) sort -d -t ":" -k 1 myFile02
+2) sort -t ":" -k 3 myFile02
+sort -n -t ":" -k 3 myFile02
+Да, има. Без указана опция по подразбиране прави лексикографско сортиране.
+3) grep "user" /etc/passwd > grepped
+wc -l grepped
+4) cut -f1 -d ":" /etc/passwd | grep "[0-9]$"
+5) grep "^[A-Z]" /еtc/passwd | cut -f6 -d ":"
+
+Задачи коплект 2:
+1) ls -l ~/ > my_file
+2) sort -t " " -k 2 my_file
+3) grep "Oct" my_file  > my_file_2
+wc -l my_file_2
+
+Задачи комплект 3:
+1) who | wc -l
+2) read string1 string2 (приканваме потребителя да въведе два низа)
+jbabukov my_file (подавам вход)
+write $string1 < $string2
+3) read string1 string2 string3 (string1,2,3 са имена на променливи, те ще се асоциират съответно с my_file1,2,3)
+my_file1 my_file2 my_file3
+cat $string1 $string2 | sort -d > $string3
+wc -l $string1 $string2 $string3
+4)read string1 string2
+grep "$string2" $string1

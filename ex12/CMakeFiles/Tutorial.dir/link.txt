@@ -1,0 +1,1 @@
+/usr/bin/cc     CMakeFiles/Tutorial.dir/sol.c.o  -o Tutorial -rdynamic 

@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/danailbd/workspace/uni/teaching/OS/exer12/sol.c
+stdio.h
+-
+unistd.h
+-
+sys/types.h
+-
+sys/wait.h
+-
+stdlib.h
+-
+fcntl.h
+-
+stdlib.h
+-
+stdio.h
+-
+

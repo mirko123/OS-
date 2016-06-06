@@ -1,0 +1,34 @@
+Задача-1: Създайте файл със съдържанието приложено в края на този файл.
+Задача0: Изведете на стандартния изход редовете, в които се среща низа "FOUND" (при проблеми преминете към Задача7)
+Задача1: Изведете на стандартния изход брой редове, завършващи на "ОК."   (при проблеми преминете към Задача7)
+Задача2: Изведете на стандартния изход брой редове, при които проверката извършена от clamd демона е завършила без намиране на нередности. (при проблеми преминете към Задача7)
+Задача3: Изведете на стандартния изход редовете, при които проверката от clamd демона е завършила с намиране на червей (Worm). (при проблеми преминете към Задача7)
+Задача4: Изведете на стандартния изход редовете, само низа "stratum", който се среща в редове съдържащи низа "ntpd" (при проблеми преминете към задача 7)
+Задача5: Изведете на стандартния изход само низа "SelfCheck" (без ":" след SelfCheck), който се среща в редовете съдържащи низа "[4963]" (при проблеми преминете към задача 7)
+Задача6: Сортирайте редовете на файла спрямо минута на получаване на лога и ги запазете резултата във файл с име myFile, който да се намира в директория myDir, която се намира във вашата начална (home) директория. (при проблеми преминете към Задача7)
+Задача7: Поканете ме да видя какво сте направили.
+
+
+Oct 16 06:30:44 ns clamd[4963]: Worm.Mydoom-27 FOUND NOT OK.
+Oct 16 06:37:48 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 06:49:14 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 07:00:36 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 07:11:13 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 07:21:35 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 07:24:00 ns clamd[4963]: Worm.NetSky-16 FOUND NOT OK.
+Oct 16 07:24:00 ns clamd[4963]: document.zip: Worm.NetSky-16 FOUND
+Oct 16 07:33:09 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 07:48:06 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 09:01:04 ns ntpd[1813]: synchronized to 93.180.6.3, stratum 2
+Oct 16 09:02:18 ns clamd[4963]: Exploit.HTML.IFrame-8 FOUND
+Oct 16 09:02:18 ns clamd[4963]: Worm.NetSky-16 FOUND NOT OK.
+Oct 16 09:04:12 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 10:12:04 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 10:24:48 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 10:34:59 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 10:45:02 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 10:51:02 ns ntpd[1813]: synchronized to 2001:67c:20d0:b0::123, stratum 2
+Oct 16 10:55:04 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 11:05:44 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 12:51:30 ns clamd[4963]: SelfCheck: Database status OK.
+Oct 16 13:01:49 ns clamd[4963]: SelfCheck: Database status OK.

@@ -1,0 +1,89 @@
+﻿Задача 1:
+Нека сме си забравили факултетния номер.
+Напишете командна процедура на bash, която да извежда на стандартния изход факултетния ви номер.
+
+
+Задача 2:
+Напишете командна процедура на bash, която приканва потребителя да въведе низ - потребителско име на потребител от системата. След което
+извежда на стандартния изход, колко пъти потребителят се е логнал.
+
+
+Задача 3:
+Напишете командна процедура на bash, която приканва потребителя да въведе пълното име на съществуваща директория.
+След което да изведе на стандартния изход подходящо съобщение за броя на всички файлове в нея и броя на всички директории в нея.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Решение задача 1:
+[..]$ vi task_01_$(date +"%Y%m%d%l").sh
+
+#bash script starts
+
+echo $(whoami | cut -c2-)
+
+#bash script ends
+
+:wq
+
+Малко обяснение: команда whoami връща потребителското име, с което сте се логнали на системата. В случая ще е факултетния номер с 
+буква "s" пред него. По условие се иска само факултетния номер, затова извеждаме на стандартния изход от втори символ нататък.
+
+
+Решение задача 2:
+[..]$ vi task_02_$(date +"%Y%m%d%l%M").sh
+
+#bash script starts
+
+echo "Please enter login name: "
+read login_name
+
+number_of_sessions=$(who | grep "$login_name" | wc -l)
+echo "User $login_name has $number_of_sessions active sessions. "
+
+#bash script ends
+
+:wq
+
+Решение задача 3:
+[..]$ vi task_03_$(date +"%Y%m%d%l%M%s").sh
+
+#bash script starts
+
+echo "Please enter an absolute name of existing directory! "
+read existing_directory
+
+number_of_directories=$(ls -l $existing_directory | grep "^d" | wc -l)
+number_of_ordinery_files=$(ls -l $existing_directory | grep "^-" | wc -l)
+echo "Number of directories in directory $existing_directory is $number_of_directories "
+
+echo "Number of ordinery files in directory $existing_directory is $number_of_ordinery_files "
+
+#bash script ends
+
+:wq
+
+Обяснение:
+[s44909@localhost ~]$ls -l /etc/passwd
+-rw-r--r--. 1 root root 19271 Oct 29 20:57 /etc/passwd
+
+[s44909@localhost ~]$ls -dl /etc/
+drwxr-xr-x. 58 root root 4096 Oct 30 11:30 /etc/
+
+По първия символ, на първото поле, спрямо разделител "." (или празен символ) разпознавам дали това с което работя е обикновен 
+файл или директория.
